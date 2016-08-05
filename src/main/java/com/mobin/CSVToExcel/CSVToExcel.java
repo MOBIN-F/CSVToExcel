@@ -6,6 +6,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by MOBIN on 2016/7/29.
@@ -15,6 +17,7 @@ public class CSVToExcel {
     private String tmp = null;
     private int lineNum = -1;
     private int headerCellNum = 0;
+    private Map<String,Integer> c0 = new HashMap<>();
     public void convert(String originPath,String targetPath,String headertype){
         try(InputStream input = new FileInputStream(originPath);//源转换文件如:f:\\test
             Reader reader = new InputStreamReader(input,"UTF-8");
@@ -36,15 +39,17 @@ public class CSVToExcel {
             for(String data = bufferedReader.readLine(); data != null; data = bufferedReader.readLine()){
                 String[] str = data.split(",");
                 int cellnum = Integer.valueOf(str[1].split("~")[1]);
-                if(str[0].equals(tmp)){//同一行
-                    Row curr_row= sheet.getRow(lineNum);
+                Integer line = c0.get(str[0]);
+                if((line != null)){//同一行
+                    Row curr_row= sheet.getRow(line);
                     curr_row.createCell(cellnum).setCellValue(str[2]);
                 }else {//不同值需
-                    Row row = sheet.createRow(++lineNum);
+                    ++lineNum;
+                    c0.put(str[0],lineNum);
+                    Row row = sheet.createRow(lineNum);
                     row.createCell(0).setCellValue(str[0]);
                     row.createCell(cellnum).setCellValue(str[2]);
                 }
-                tmp = str[0];
             }
             wb.write(out);
         } catch (FileNotFoundException e) {
