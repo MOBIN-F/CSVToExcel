@@ -70,7 +70,7 @@ public class CSVToExcel {
 
     public static void main(String[] args) {
         if (args.length != 3) {
-            System.err.println("请输入3个参数:源文件路径,目标文件路径");
+            System.err.println("请输入2个参数:源文件路径,目标文件路径");
             return;
         } else {
             CSVToExcel csvToExcel = new CSVToExcel();
