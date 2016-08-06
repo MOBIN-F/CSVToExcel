@@ -9,6 +9,6 @@ public class CSVToExcelTest {
     @Test
     public void csvToExcel(){
         CSVToExcel csvToExcel = new CSVToExcel();
-        csvToExcel.convert("f:\\test1","f:\\p.xls","s3a");
+        csvToExcel.convert("f:\\test1","f:\\p.xls");
     }
 }
