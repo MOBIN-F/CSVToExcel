@@ -16,6 +16,7 @@ import java.util.Map;
 public class CSVToExcel {
 
     private int lineNum = 0;
+    private int colNum = 0;
     private Map<String, Integer> mapRow = new HashMap<>();   //值所在行
     private Map<String, Integer> mapCol = new HashMap<>();   //表头所在列
     private String[] str;
@@ -62,7 +63,7 @@ public class CSVToExcel {
 
     public void isaddHeader(Sheet sheet, Integer lineCol, int cellnum_1, String value_1) {
         if (lineCol == null) {                                                                         //说明该表头字段不存在
-            mapCol.put(value_1, cellnum_1);
+            mapCol.put(value_1, ++colNum);
             sheet.getRow(0).createCell(cellnum_1).setCellValue(value_1);  //添加新表头字段
         }
     }
