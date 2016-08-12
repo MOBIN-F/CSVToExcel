@@ -1,10 +1,10 @@
 package com.mobin.CSVToExcel;
 
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.*;
 import java.util.HashMap;
@@ -32,7 +32,7 @@ public class CSVToExcel {
              BufferedReader bufferedReader = new BufferedReader(reader);
              FileOutputStream out = new FileOutputStream(targetPath)) {  //如：:f:\\test.xls
 
-            Workbook wb = new HSSFWorkbook();  //Excel
+            Workbook wb = new XSSFWorkbook();  //Excel
             Sheet sheet = wb.createSheet("Sheet");//如：:xxxSheet
             sheet.createRow(0);                                //创建表头行
             //插入数据
