@@ -44,7 +44,7 @@ public class CSVToExcel {
                     curr_row = sheet.getRow(lineRow);
                     isaddHeader(sheet, lineCol,str[1]);
                     cellnum = mapCol.get(str[1]);
-                    curr_row.createCell(cellnum).setCellValue(str[2]);
+                    curr_row.createCell(cellnum).setCellValue(Double.valueOf(str[2]));
                 } else {                                                           //不同行
                     ++lineNum;
                     mapRow.put(str[0], lineNum);
@@ -52,10 +52,12 @@ public class CSVToExcel {
                     row.createCell(0).setCellValue(str[0]);  //第一列值
                     isaddHeader(sheet, lineCol,str[1]);  //添加表头
                     cellnum = mapCol.get(str[1]);
-                    row.createCell(cellnum).setCellValue(str[2]);
+                    row.createCell(cellnum).setCellValue(Double.valueOf(str[2]));
                 }
             }
+            sheet.getRow(0).createCell(0).setCellValue("name");
             wb.write(out);
+            wb.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -77,7 +79,7 @@ public class CSVToExcel {
             return;
         } else {
             CSVToExcel csvToExcel = new CSVToExcel();
-            csvToExcel.convert(args[0], args[1]);
+            csvToExcel.convert(args[0],args[1]);
         }
     }
 }
