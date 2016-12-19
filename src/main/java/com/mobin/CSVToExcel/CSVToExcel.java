@@ -14,7 +14,6 @@ import java.util.Map;
  * Created by MOBIN on 2016/7/29.
  */
 public class CSVToExcel {
-
     private int lineNum = 0;
     private int colNum = 0;
     private Map<String, Integer> mapRow = new HashMap<>();   //值所在行
